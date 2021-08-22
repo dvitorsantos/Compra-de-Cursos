@@ -1,10 +1,9 @@
 <?php namespace App\Controllers;
- 
-use CodeIgniter\RESTful\ResourceController;
+
 use CodeIgniter\API\ResponseTrait;
 use App\Models\UsuarioModel;
  
-class Usuarios extends ResourceController
+class Usuarios extends BaseController
 {
     use ResponseTrait;
     public function index() {

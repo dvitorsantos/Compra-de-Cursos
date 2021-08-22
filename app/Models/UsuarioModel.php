@@ -10,7 +10,7 @@ class UsuarioModel extends Model
     protected $validationRules    = [
         'nome'     => 'required|max_length[100]',
         'email'         => 'required|max_length[40]',
-        'senha'         => 'required|max_length[40]',   
+        'senha'         => 'required|max_length[100]',   
     ];
 }
  
