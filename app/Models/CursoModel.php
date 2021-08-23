@@ -14,4 +14,3 @@ class CursoModel extends Model
         'preco'         => 'required|decimal',
     ];
 }
- 

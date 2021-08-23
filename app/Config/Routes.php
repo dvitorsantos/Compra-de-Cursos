@@ -35,6 +35,7 @@ $routes->setAutoRoute(true);
 $routes->resource('cursos');
 $routes->post('login', 'Login::login');
 $routes->post('register', 'Register::register');
+$routes->post('carrinho', 'Carrinho::create');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
