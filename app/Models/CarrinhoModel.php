@@ -4,11 +4,10 @@ use CodeIgniter\Model;
   
 class CarrinhoModel extends Model
 {
-    protected $table = 'curso';
+    protected $table = 'carrinho';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['status', 'total'];
+    protected $allowedFields = ['id_user', 'total'];
     protected $validationRules    = [
-        'status'     => 'required|max_length[50]',
-        'total'         => 'required|decimal',
+        'id_user'     => 'required|max_length[50]',
     ];
 }

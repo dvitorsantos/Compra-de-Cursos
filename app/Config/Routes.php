@@ -33,9 +33,14 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->resource('cursos');
+
 $routes->post('login', 'Login::login');
 $routes->post('register', 'Register::register');
+
+$routes->get('carrinho', 'Carrinho::index');
 $routes->post('carrinho', 'Carrinho::create');
+$routes->get('carrinho/(:segment)', 'Carrinho::show/$1');
+$routes->post('carrinho/add', 'Carrinho::add');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
