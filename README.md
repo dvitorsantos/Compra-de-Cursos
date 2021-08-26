@@ -19,7 +19,6 @@ API para sistema de compra de cursos.
 
    **Required:**
  
-   `id=[integer]`
 
 * **Data Params**
 
@@ -27,7 +26,7 @@ API para sistema de compra de cursos.
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** 200
   * **Content:** `[
   {
     "id": "1",
@@ -52,7 +51,7 @@ API para sistema de compra de cursos.
 
 **Detalhar curso**
 ----
-  Retorna todos os cursos cadastrados
+  Retorna o detalhamento do curso recebendo seu nome
 
 * **URL**
 
@@ -139,34 +138,363 @@ API para sistema de compra de cursos.
  
 * **Error Response:**
 
-```bash
-/login
-```
-#### (POST) Recebe email e senha para autenticação do usuário
-```bash
-/register
-```
-#### (POST) Recebe nome, email e senha para criação de um novo usuário
-```bash
-/carrinho
-```
-#### (GET) Lista todos os carrinhos
 
-```bash
-/carrinho/$id
-```
-#### (GET) Detalha o carrinho pelo id
+**Autenticar Usuário**
+----
+  Autentica o usuário e retorna os dados do mesmo
+
+* **URL**
+
+  /login
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   None
+
+* **Data Params**
+
+  `email=[string]`
+
+  `senha=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200
+  * **Content:** `[
+  {
+    "id": "8",
+    "email": "roberto@email.com",
+    "senha": "$2y$10$Fp0ZUlaVY/xAAty3iO369eodLCE7IlWuW68979vdTOXs5XI4dTCJ.",
+    "nome": "Roberto"
+  }
+]`
+ 
+* **Error Response:**
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Email incorreto."
+  }`
+
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Senha incorreta."
+  }
+}`
+
+**Registrar usuário**
+----
+  Registra um novo usuário no sistema
+
+* **URL**
+
+  /register
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   None
+
+* **Data Params**
+
+  `nome=[string]`
+
+  `email=[string]`
+
+  `senha=[string]`
+
+* **Success Response:**
+
+  * **Code:** 201
+  * **Content:** `{
+  "status": 201,
+  "error": null,
+  "messages": {
+    "success": "Dados salvos"
+  }
+}`
+ 
+* **Error Response:**
 
 
-```bash
-/carrinho/add
-```
-#### (GET) Recebe id do curso e id do carrinho para adicionar no carrinho
+**Criar novo carrinho**
+----
+  Cria um carrinho vazio no sistema para um determinado usuário
 
-```bash
-/carrinho/remove
-```
-#### (GET) Recebe id do curso e id do carrinho para remover o curso do carrinho
+* **URL**
+
+  /carrinho
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   None
+
+* **Data Params**
+
+  `id_usuario=[int]`
+
+
+* **Success Response:**
+
+  * **Code:** 201
+  * **Content:** `{
+  "status": 201,
+  "error": null,
+  "messages": {
+    "success": "Carrinho criado."
+  }
+}`
+ 
+ * **Error Response:**
+
+**Listar carrinhos**
+----
+  Lista todos os carrinhos registrados no sistema
+
+* **URL**
+
+  /carrinho
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   None
+
+* **Data Params**
+
+
+* **Success Response:**
+
+  * **Code:** 200
+  * **Content:** `[
+  {
+    "id": "1",
+    "id_user": "9",
+    "total": "1000"
+  },
+  {
+    "id": "2",
+    "id_user": "8",
+    "total": "10"
+  },
+  {
+    "id": "3",
+    "id_user": "10",
+    "total": "0"
+  },
+  {
+    "id": "4",
+    "id_user": "10",
+    "total": "400"
+  }
+]`
+ 
+* **Error Response:**
+
+
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Nenhum carrinho com id: 10"
+  }
+}`
+
+**Detalhar carrinho**
+----
+  Detalha os cursos do carrinho e o valor total do mesmo
+
+* **URL**
+
+  /carrinho/$id
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `id_carrinho=[int]`
+
+* **Data Params**
+    
+
+* **Success Response:**
+
+  * **Code:** 200
+  * **Content:** `{
+  "produtos": [
+    {
+      "id": "8",
+      "id_curso": "1",
+      "nome": "Inglês",
+      "categoria": "Línguas",
+      "descricao": "Curso de Inglês",
+      "preco": "200"
+    }
+  ],
+  "total": [
+    {
+      "total": "200"
+    }
+  ]
+}`
+ 
+* **Error Response:**
+
+
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Nenhum carrinho com id: 10"
+  }
+}`
+
+**Adicionar curso no carrinho**
+----
+  Adiciona um curso existente no sistema à um determinado carrinho
+
+* **URL**
+
+  /carrinho/add
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   None
+
+* **Data Params**
+
+  `id_carrinho=[int]`
+
+  `id_curso=[int]`
+
+
+* **Success Response:**
+
+  * **Code:** 201
+  * **Content:** `{
+  "status": 201,
+  "error": null,
+  "messages": {
+    "success": "Curso adicionado ao carrinho."
+  }
+}`
+ 
+* **Error Response:**
+
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Carrinho não cadastrado."
+  }
+}`
+
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Curso não cadastrado."
+  }
+}`
+
+**Remover curso do carrinho**
+----
+  Remove um curso existente no sistema de um determinado carrinho
+
+* **URL**
+
+  /carrinho/remove
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   None
+
+* **Data Params**
+
+  `id_carrinho=[int]`
+
+  `id_curso=[int]`
+
+
+* **Success Response:**
+
+  * **Code:** 201
+  * **Content:** `{
+  "status": 201,
+  "error": null,
+  "messages": {
+    "success": "Curso removido do carrinho."
+  }
+}`
+ 
+* **Error Response:**
+
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Carrinho não cadastrado."
+  }
+}`
+
+  * **Code:** 404
+  * **Content:** `{
+  "status": 404,
+  "error": 404,
+  "messages": {
+    "error": "Curso não cadastrado."
+  }
+}`
+ 
+
 
 ## Autor
 Vitor Alan de Lima Santos
