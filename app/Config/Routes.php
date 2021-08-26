@@ -41,7 +41,7 @@ $routes->get('carrinho', 'Carrinho::index');
 $routes->post('carrinho', 'Carrinho::create');
 $routes->get('carrinho/(:segment)', 'Carrinho::show/$1');
 $routes->post('carrinho/add', 'Carrinho::add');
-$routes->post('carrinho/remove', 'Carrinho::remove');
+$routes->delete('carrinho/remove', 'Carrinho::remove');
 
 /*
  * --------------------------------------------------------------------
