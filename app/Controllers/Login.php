@@ -21,7 +21,8 @@ class Login extends BaseController
             if ($verify) {
                 return $this->respond($data);
             }
+            return $this->failNotFound('Senha incorreta.');  
         }
-
+        return $this->failNotFound('Email incorreto.');  
     }
 }

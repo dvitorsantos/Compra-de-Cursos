@@ -60,11 +60,21 @@ class Carrinho extends BaseController
         ];
 
         $db = \Config\Database::connect();
+
+         
         $total = $db->query('SELECT `total` FROM `carrinho` WHERE `carrinho`.`id` = '.$id_carrinho.'');
         $preco = $db->query('SELECT `preco` FROM `curso` WHERE `curso`.`id` = '.$id_curso.';');
 
         $total_result = $total->getResult();
         $preco_result = $preco->getResult();
+
+        if (!$total_result) {
+            return $this->failNotFound('Carrinho não cadastrado.');
+        }
+
+        else if (!$preco_result) {
+            return $this->failNotFound('Curso não cadastrado.');   
+        }
 
         $soma_preco_com_total = $preco_result[0]->preco + $total_result[0]->total;
 
@@ -93,6 +103,14 @@ class Carrinho extends BaseController
 
         $total_result = $total->getResult();
         $preco_result = $preco->getResult();
+
+        if (!$total_result) {
+            return $this->failNotFound('Carrinho não cadastrado.');
+        }
+
+        else if (!$preco_result) {
+            return $this->failNotFound('Curso não cadastrado.');   
+        }
 
         $subtracao_total = $total_result[0]->total - $preco_result[0]->preco;
 
