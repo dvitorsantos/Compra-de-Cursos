@@ -448,7 +448,7 @@ API para sistema de compra de cursos.
 
 * **Method:**
 
-  `POST`
+  `DELETE`
   
 *  **URL Params**
 
